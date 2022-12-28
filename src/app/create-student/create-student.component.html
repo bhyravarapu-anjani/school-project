@@ -1,0 +1,81 @@
+<p>create-student works!</p>
+<form>
+    <label [formGroup]="studentForm">name</label>
+    <input type="text" formControlName="name">
+    <br>
+    <div *ngIf="studentForm.get('name')?.touched && studentForm.get('name')?.invalid">
+        <P *ngIf="studentForm.get('name')?.errors?.['required']">minimum chars required</P>
+        <p *ngIf="studentForm.get('name')?.errors?.['minlength']">minimm required</p>
+
+    </div>
+    <label>class</label>
+    <input type="text" formControlName="class">
+    <br>
+    <label>fatherName</label>
+    <input type="text" formControlName="fatherName">
+    <br>
+    <label>email</label>
+    <input type="text" formControlName="email">
+    <br>
+    <label>dob</label>
+    <input type="text" formControlName="dob">
+    <br>
+    <label>address</label>
+    <input type="text" formControlName="address">
+    <br>
+    <div formGroupName="address">
+        <label>addressLine</label>
+        <input type="text" formControlName="addressLine">
+        <br>
+        <label>city</label>
+        <input type="text" formControlName="city">
+        <br>
+        <label>state</label>
+        <input type="text" formControlName="state">
+        <br>
+        <label>pin</label>
+        <input type="text" formControlName="pin">
+        <br>
+
+    </div>
+    <div FormArrayName="studentClass">
+        <div *ngFor="let clas of studentClassFormArray.controls;let i=index">
+            <h4>enter class details {{i+1}}</h4>
+            <div formGroupName = {{i}}>
+                <label>class</label>
+                <input type="number" formControlName="class">
+                <br>
+                <label>percentage</label>
+                <input type="number" formControlName="percentage">              
+                 <br>
+                 <button (click)="delete(i)">delete</button>
+
+            </div>
+        </div>
+    </div>
+    <button (click)="add()" >Add</button>
+    <label>type</label>
+    <input type="radio" name="type" formControlName="type" value="DayScholar">
+    <label>DayScholar</label>
+    <div *ngIf="studentForm.get('type')?.value=='DayScholar'">
+        <label>BUS FEE</label>
+        <input type="number">
+        <br>
+    </div>    
+        
+    
+    <input type="radio" name="type" formControlName="type" value="Residential">
+    <label>Residential</label>
+    
+    <div *ngIf="studentForm.get('type')?.value=='Residential'">
+        <label>Hostel Fees</label>
+        <input type="number">
+        <br>
+        
+    </div>
+    <br>
+    <button (click)="submit()">submit</button>
+
+
+    
+</form>
